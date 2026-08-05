@@ -2,13 +2,13 @@
   boot = {
     initrd = {
       availableKernelModules = [
-        "xhci_pci"
-        "thunderbolt"
         "nvme"
-        "usb_storage"
         "sd_mod"
-        "sr_mod"
         "sdhci_pci"
+        "sr_mod"
+        "thunderbolt"
+        "usb_storage"
+        "xhci_pci"
       ];
       kernelModules = [ "i915" ];
     };

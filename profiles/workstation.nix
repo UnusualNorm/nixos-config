@@ -61,6 +61,7 @@ in
       fuzzel
       git
       mako
+      nixd
       notify-send-all
       pavucontrol
       spotify
