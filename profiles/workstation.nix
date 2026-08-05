@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   notify-send-all = pkgs.writeShellApplication {
     name = "notify-send-all";
@@ -150,6 +150,10 @@ in
     };
     power-profiles-daemon.enable = true;
     tumbler.enable = true;
+    zerotierone = {
+      enable = true;
+      joinNetworks = [ "a84ac5c10a761621" ];
+    };
   };
   systemd = {
     services = {

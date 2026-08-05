@@ -1,4 +1,4 @@
-{ config, lib, modulesPath, pkgs, ... }: {
+{ pkgs, ... }: {
   boot = {
     initrd = {
       availableKernelModules = [
