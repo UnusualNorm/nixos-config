@@ -1,0 +1,22 @@
+length = 70;
+width = 208;
+height = 200;
+
+images = [];
+for (i = 1; i <= length; i++) {
+    images[i] = Image(i + ".png");
+}
+
+sprite = Sprite();
+sprite.SetX(Window.GetWidth() / 2 - width / 2);
+sprite.SetY(Window.GetHeight() / 2 - height / 2);
+
+index = 1;
+fun refresh() {
+    sprite.SetImage(images[index]);
+    index++;
+    if (index > length)
+        index = 1;
+}
+
+Plymouth.SetRefreshFunction(refresh);

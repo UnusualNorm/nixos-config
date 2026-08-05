@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Chihuahua
+Description=Chihuahua
+ModuleName=script
+
+[script]
+ImageDir=@THEME_DIR@
+ScriptFile=@THEME_DIR@/theme.script
