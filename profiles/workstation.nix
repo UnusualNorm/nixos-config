@@ -59,12 +59,15 @@ in
       })
       foot
       fuzzel
+      git
       mako
       notify-send-all
       pavucontrol
       spotify
       thunderbird
+      vim
       xwayland-satellite
+      zed-editor
     ];
   };
   fonts = {
