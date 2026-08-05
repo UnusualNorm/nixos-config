@@ -24,6 +24,7 @@
   swapDevices = [ { label = "swap"; } ];
   system.autoUpgrade = {
     enable = true;
+    flags = [ "--no-write-lock-file" ];
     flake = "github:UnusualNorm/nixos-config#${config.networking.hostName}";
   };
   time.timeZone = "America/Chicago";
