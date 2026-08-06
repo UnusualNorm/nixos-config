@@ -51,7 +51,9 @@ in
     etc."niri/config.kdl".source = ../niri/config.kdl;
     sessionVariables.NIXOS_OZONE_WL = "1";
     systemPackages = with pkgs; [
+      audacity
       bitwarden-desktop
+      blockbench
       brave-origin
       (discord.override {
         withOpenASAR = true;
@@ -60,7 +62,10 @@ in
       fastfetch
       foot
       fuzzel
+      gimp
       git
+      imhex
+      kdePackages.kdenlive
       mako
       nixd
       notify-send-all
@@ -74,9 +79,7 @@ in
   };
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs; [
-      font-awesome_4
-    ];
+    packages = with pkgs; [ font-awesome ];
   };
   home-manager.users.unusualnorm = { pkgs, ... }: {
     gtk = {
@@ -91,6 +94,13 @@ in
         name = "Adwaita-dark";
         package = pkgs.gnome-themes-extra;
       };
+    };
+    home.pointerCursor = {
+      enable = true;
+      gtk.enable = true;
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
+      x11.enable = true;
     };
     qt = {
       enable = true;
