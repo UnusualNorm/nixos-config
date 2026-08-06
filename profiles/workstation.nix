@@ -57,6 +57,7 @@ in
         withOpenASAR = true;
         withVencord = true;
       })
+      fastfetch
       foot
       fuzzel
       git
@@ -104,6 +105,7 @@ in
   };
   nixpkgs.config.allowUnfree = true;
   programs = {
+    bash.interactiveShellInit = "fastfetch";
     niri.enable = true;
     steam = {
       enable = true;
