@@ -56,6 +56,7 @@ in
       bitwarden-desktop
       blockbench
       brave-origin
+      codex
       (discord.override {
         withOpenASAR = true;
         withVencord = true;
@@ -71,6 +72,7 @@ in
       nixd
       notify-send-all
       pavucontrol
+      python3
       spotify
       thunderbird
       vim
