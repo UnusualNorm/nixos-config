@@ -82,6 +82,19 @@ in
     enableDefaultPackages = true;
     packages = with pkgs; [ font-awesome ];
   };
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        FastConnectable = true;
+      };
+      Policy = {
+        AutoEnable = true;
+      };
+    };
+  };
   home-manager.users.unusualnorm = { pkgs, ... }: {
     gtk = {
       colorScheme = "dark";
@@ -143,6 +156,7 @@ in
     rtkit.enable = true;
   };
   services = {
+    blueman.enable = true;
     flatpak.enable = true;
     gnome.gnome-keyring.enable = true;
     greetd = {
