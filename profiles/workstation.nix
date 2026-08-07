@@ -51,6 +51,7 @@ in
     etc."niri/config.kdl".source = ../niri/config.kdl;
     sessionVariables.NIXOS_OZONE_WL = "1";
     systemPackages = with pkgs; [
+      android-tools
       audacity
       bitwarden-desktop
       blockbench
@@ -117,6 +118,10 @@ in
   programs = {
     bash.interactiveShellInit = "fastfetch";
     niri.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = pkgs.steam-run.args.multiPkgs pkgs;
+    };
     steam = {
       enable = true;
       extest.enable = true;
