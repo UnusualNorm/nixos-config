@@ -14,7 +14,10 @@
     };
     kernelModules = [ "kvm-intel" ];
   };
-  hardware.cpu.intel.updateMicrocode = true;
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    nvidia.open = true;
+  };
   home-manager.users.unusualnorm.home.stateVersion = "26.05";
   imports = [ ./profiles/workstation.nix ];
   networking.hostName = "norman";
