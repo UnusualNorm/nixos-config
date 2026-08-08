@@ -16,7 +16,10 @@
   };
   hardware = {
     cpu.intel.updateMicrocode = true;
-    nvidia.open = true;
+    nvidia = {
+      nvidiaSettings = true;
+      open = true;
+    };
   };
   home-manager.users.unusualnorm.home.stateVersion = "26.05";
   imports = [ ./profiles/workstation.nix ];
