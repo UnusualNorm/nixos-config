@@ -7,11 +7,11 @@ let
       for bus in /run/user/[0-9]*/bus; do
         uid="''${bus#/run/user/}"
         uid="''${uid%/bus}"
-        passwd_entry="$(
+        ent="$(
           ${pkgs.getent}/bin/getent passwd "$uid"
         )"
-        [[ -n "$passwd_entry" ]] || continue
-        user="''${passwd_entry%%:*}"
+        [[ -n "$ent" ]] || continue
+        user="''${ent%%:*}"
         ${pkgs.util-linux}/bin/runuser -u "$user" -- \
           ${pkgs.coreutils}/bin/env \
           XDG_RUNTIME_DIR="/run/user/$uid" \
@@ -23,6 +23,11 @@ let
 in
 {
   boot = {
+    binfmt.registrations.wasm = {
+      interpreter = "${pkgs.wasmtime}/bin/wasmtime";
+      magicOrExtension = ''\x00asm'';
+      recognitionType = "magic";
+    };
     consoleLogLevel = 3;
     initrd.verbose = false;
     kernelParams = [
@@ -66,7 +71,9 @@ in
       fuzzel
       gimp
       git
+      (callPackage ../packages/ilspy.nix {})
       imhex
+      jq
       kdePackages.kdenlive
       mako
       nixd
@@ -76,6 +83,7 @@ in
       spotify
       thunderbird
       vim
+      (callPackage ../packages/wscat.nix {})
       xwayland-satellite
       zed-editor
     ];
@@ -129,6 +137,10 @@ in
     allowedTCPPorts = [ 57621 ];
     allowedUDPPorts = [ 5353 ];
   };
+  nix.settings.experimental-features = [
+    "flakes"
+    "nix-command"
+  ];
   nixpkgs.config.allowUnfree = true;
   programs = {
     bash.interactiveShellInit = "fastfetch";
@@ -233,4 +245,5 @@ in
       targets.graphical-session.wants = [ "foot-server.service" ];
     };
   };
+  virtualisation.podman.enable = true;
 }
