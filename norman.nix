@@ -29,6 +29,16 @@
   home-manager.users.unusualnorm.home.stateVersion = "26.05";
   imports = [ ./profiles/workstation.nix ];
   networking.hostName = "norman";
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services = {
+    pipewire.extraConfig.pipewire."92-low-latency" = {
+      "context.properties" = {
+        "default.clock.rate" = 48000;
+        "default.clock.quantum" = 32;
+        "default.clock.min-quantum" = 32;
+        "default.clock.max-quantum" = 32;
+      };
+    };
+    xserver.videoDrivers = [ "nvidia" ];
+  };
   system.stateVersion = "26.05";
 }
