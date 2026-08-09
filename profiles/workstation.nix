@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   notify-send-all = pkgs.writeShellApplication {
     name = "notify-send-all";
@@ -54,6 +54,7 @@ in
   };
   environment = {
     etc."niri/config.kdl".source = ../niri/config.kdl;
+    etc."niri/host.kdl".source = ../niri/${config.networking.hostName}.kdl;
     sessionVariables.NIXOS_OZONE_WL = "1";
     systemPackages = with pkgs; [
       android-tools
@@ -184,11 +185,11 @@ in
       alsa.enable = true;
       alsa.support32Bit = true;
       configPackages = [(pkgs.writeTextDir
-        "share/pipewire/pipewire.conf.d/99-input-denoising.conf"
+        "share/pipewire/pipewire.conf.d/deepfilter-mono-source.conf"
         (builtins.replaceStrings
-            [ "%RNNOISE_PLUGIN%" ]
-            [ "${pkgs.rnnoise-plugin}" ]
-            (builtins.readFile ../pipewire/99-input-denoising.conf))
+            [ "%DEEPFILTERNET%" ]
+            [ "${pkgs.deepfilternet}" ]
+            (builtins.readFile ../pipewire/deepfilter-mono-source.conf))
       )];
       enable = true;
       pulse.enable = true;
@@ -223,7 +224,8 @@ in
         };
         script = ''
           ${notify-send-all}/bin/notify-send-all \
-            "NixOS Upgrade Success"
+            "NixOS Upgrade Success" \
+            "reboot"
         '';
       };
     };

@@ -159,3 +159,4 @@ screenshot-path "~/Pictures/Screenshots/%Y-%m-%dT%H-%M-%S.png"
 window-rule {
     clip-to-geometry true
 }
+include "host.kdl"

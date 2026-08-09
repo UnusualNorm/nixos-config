@@ -1,0 +1,7 @@
+output "LG Electronics 27GL650F 0x00040D5A" {
+    position x=0 y=0
+}
+
+output "LG Electronics LG FULL HD 0x01010101" {
+    position x=-1920 y=0
+}

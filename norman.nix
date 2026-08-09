@@ -14,6 +14,11 @@
     };
     kernelModules = [ "kvm-intel" ];
   };
+  fileSystems."/mnt" = {
+    fsType = "ext4";
+    label = "data";
+    options = [ "nofail" ];
+  };
   hardware = {
     cpu.intel.updateMicrocode = true;
     nvidia = {
