@@ -80,7 +80,6 @@ in
       nixd
       notify-send-all
       pavucontrol
-      python3
       spotify
       thunderbird
       vim
@@ -145,6 +144,7 @@ in
   nixpkgs.config.allowUnfree = true;
   programs = {
     bash.interactiveShellInit = "fastfetch";
+    direnv.enable = true;
     niri.enable = true;
     nix-ld = {
       enable = true;
