@@ -72,18 +72,20 @@ in
       fuzzel
       gimp
       git
-      (callPackage ../packages/ilspy.nix {})
+      (callPackage ../pkgs/ilspy/package.nix {})
       imhex
       jq
       kdePackages.kdenlive
       mako
+      mangayomi
+      ncdu
       nixd
       notify-send-all
       pavucontrol
       spotify
       thunderbird
       vim
-      (callPackage ../packages/wscat.nix {})
+      (callPackage ../pkgs/wscat/package.nix {})
       xwayland-satellite
       zed-editor
     ];
@@ -131,6 +133,7 @@ in
       platformTheme.name = "adwaita";
       style.name = "adwaita-dark";
     };
+    services.xembed-sni-proxy.enable = true;
   };
   imports = [ ./default.nix ];
   networking.firewall = {
@@ -185,7 +188,7 @@ in
       alsa.enable = true;
       alsa.support32Bit = true;
       configPackages = [(pkgs.writeTextDir
-        "share/pipewire/pipewire.conf.d/deepfilter-mono-source.conf"
+        "share/pipewire/filter-chain.conf.d/deepfilter-mono-source.conf"
         (builtins.replaceStrings
             [ "%DEEPFILTERNET%" ]
             [ "${pkgs.deepfilternet}" ]
@@ -232,6 +235,16 @@ in
     user = {
       services = {
         niri.enableDefaultPath = false;
+        pipewire-filter-chain = {
+          after = [ "pipewire.service" ];
+          bindsTo = [ "pipewire.service" ];
+          serviceConfig = {
+            ExecStart = "${pkgs.pipewire}/bin/pipewire -c filter-chain.conf";
+            Restart = "on-failure";
+            Type = "simple";
+          };
+          wantedBy = [ "default.target" ];
+        };
         swaybg = {
           after = [ "graphical-session.target" ];
           description = "swaybg";

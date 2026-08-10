@@ -33,7 +33,7 @@ buildDotnetModule (finalAttrs: {
   dotnet-sdk = dotnetCorePackages.sdk_11_0;
 
   projectFile = "ILSpy.Desktop.slnf";
-  nugetDeps = ./ilspy-deps.json;
+  nugetDeps = ./deps.json;
   dotnetRestoreFlags = [
     "--force-evaluate"
   ];

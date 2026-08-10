@@ -11,6 +11,11 @@
         "sd_mod"
         "sr_mod"
       ];
+      kernelModules = [
+        "nvidia"
+        "nvidia_drm"
+        "nvidia_modeset"
+      ];
     };
     kernelModules = [ "kvm-intel" ];
   };
@@ -29,16 +34,6 @@
   home-manager.users.unusualnorm.home.stateVersion = "26.05";
   imports = [ ./profiles/workstation.nix ];
   networking.hostName = "norman";
-  services = {
-    pipewire.extraConfig.pipewire."92-low-latency" = {
-      "context.properties" = {
-        "default.clock.rate" = 48000;
-        "default.clock.quantum" = 32;
-        "default.clock.min-quantum" = 32;
-        "default.clock.max-quantum" = 32;
-      };
-    };
-    xserver.videoDrivers = [ "nvidia" ];
-  };
+  services.xserver.videoDrivers = [ "nvidia" ];
   system.stateVersion = "26.05";
 }

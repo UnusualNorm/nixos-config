@@ -13,7 +13,7 @@
     hash = "sha256-Lc7GgutBcrrPAa5FtQmtFbtWtrNfa47CtMRrh9FflIA=";
   };
 
-  postPatch = "cp ${./wscat-lock.json} package-lock.json";
+  postPatch = "cp ${./package-lock.json} package-lock.json";
 
   npmDepsHash = "sha256-66dvzV8O1BJtVOK5Pt4Z+yTUIQF0eNQ+s45GtOKzpOw=";
 
