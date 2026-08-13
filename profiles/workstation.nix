@@ -82,6 +82,7 @@ in
       nixd
       notify-send-all
       pavucontrol
+      (callPackage ../pkgs/ryubing-canary/package.nix {})
       spotify
       thunderbird
       vim
