@@ -63,10 +63,6 @@ in
       blockbench
       brave-origin
       codex
-      (discord.override {
-        withOpenASAR = true;
-        withVencord = true;
-      })
       fastfetch
       foot
       fuzzel
@@ -85,6 +81,7 @@ in
       (callPackage ../pkgs/ryubing-canary/package.nix {})
       spotify
       thunderbird
+      vesktop
       vim
       (callPackage ../pkgs/wscat/package.nix {})
       xwayland-satellite
@@ -180,9 +177,7 @@ in
     gnome.gnome-keyring.enable = true;
     greetd = {
       enable = true;
-      settings.default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet -rt";
-      };
+      settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet -tbr -c niri-session";
     };
     gvfs.enable = true;
     pipewire = {
