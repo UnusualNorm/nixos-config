@@ -64,6 +64,7 @@ in
       brave-origin
       codex
       fastfetch
+      ffmpeg
       foot
       fuzzel
       gimp
@@ -74,6 +75,7 @@ in
       kdePackages.kdenlive
       mako
       mangayomi
+      mpv
       ncdu
       nixd
       notify-send-all
