@@ -69,6 +69,7 @@ in
       fuzzel
       gimp
       git
+      gparted-full
       (callPackage ../pkgs/ilspy/package.nix {})
       imhex
       jq
@@ -76,10 +77,10 @@ in
       mako
       mangayomi
       mpv
-      ncdu
       nixd
       notify-send-all
       pavucontrol
+      qdirstat
       (callPackage ../pkgs/ryubing-canary/package.nix {})
       spotify
       thunderbird

@@ -43,4 +43,5 @@
       sha256 = "0y0zph4hf1ssg4v8k3s21hbbxnw22pv6cfn2j5j32qx36iw57i76";
     })];
   };
+  zramSwap.enable = true;
 }
