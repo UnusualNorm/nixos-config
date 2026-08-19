@@ -53,8 +53,14 @@ in
     };
   };
   environment = {
-    etc."niri/config.kdl".source = ../niri/config.kdl;
-    etc."niri/host.kdl".source = ../niri/${config.networking.hostName}.kdl;
+    etc = {
+      "niri/config.kdl".source = ../niri/config.kdl;
+      "niri/host.kdl".source = ../niri/${config.networking.hostName}.kdl;
+      "swaylock/config".text = ''
+        image=${../swaylock/image.png}
+        scaling=fill
+      '';
+    };
     sessionVariables.NIXOS_OZONE_WL = "1";
     systemPackages = with pkgs; [
       android-tools
@@ -83,9 +89,12 @@ in
       qdirstat
       (callPackage ../pkgs/ryubing-canary/package.nix {})
       spotify
+      steam-run
+      swaylock
       thunderbird
       vesktop
       vim
+      wayvr
       (callPackage ../pkgs/wscat/package.nix {})
       xwayland-satellite
       zed-editor
@@ -171,7 +180,10 @@ in
     waybar.enable = true;
   };
   security = {
-    polkit.enable = true;
+    polkit = {
+      enable = true;
+      enablePkexecWrapper = true;
+    };
     rtkit.enable = true;
   };
   services = {
@@ -244,9 +256,20 @@ in
           };
           wantedBy = [ "default.target" ];
         };
+        polkit-kde-agent = {
+          wantedBy = [ "graphical-session.target" ];
+          after = [ "graphical-session.target" ];
+          partOf = [ "graphical-session.target" ];
+          serviceConfig = {
+            Type = "simple";
+            ExecStart =
+              "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
+            Restart = "on-failure";
+          };
+          environment.QT_STYLE_OVERRIDE = "Fusion";
+        };
         swaybg = {
           after = [ "graphical-session.target" ];
-          description = "swaybg";
           partOf = [ "graphical-session.target" ];
           serviceConfig = {
             ExecStart = "${pkgs.swaybg}/bin/swaybg -i ${../swaybg/wallpaper.png} -m fill";
