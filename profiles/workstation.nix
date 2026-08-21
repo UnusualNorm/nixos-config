@@ -140,8 +140,7 @@ in
     };
     qt = {
       enable = true;
-      platformTheme.name = "adwaita";
-      style.name = "adwaita-dark";
+      platformTheme.name = "gtk3";
     };
     services.xembed-sni-proxy.enable = true;
   };
