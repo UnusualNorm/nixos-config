@@ -68,6 +68,7 @@ in
       bitwarden-desktop
       blockbench
       brave-origin
+      brightnessctl
       codex
       fastfetch
       ffmpeg
@@ -82,10 +83,12 @@ in
       kdePackages.kdenlive
       mako
       mangayomi
+      mission-center
       mpv
       nixd
       notify-send-all
       pavucontrol
+      playerctl
       qdirstat
       (callPackage ../pkgs/ryubing-canary/package.nix {})
       spotify
@@ -155,7 +158,6 @@ in
   ];
   nixpkgs.config.allowUnfree = true;
   programs = {
-    bash.interactiveShellInit = "fastfetch";
     direnv.enable = true;
     niri.enable = true;
     nix-ld = {
