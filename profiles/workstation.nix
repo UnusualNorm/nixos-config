@@ -69,6 +69,7 @@ in
       blockbench
       brave-origin
       brightnessctl
+      bubblewrap
       codex
       fastfetch
       ffmpeg
@@ -77,7 +78,7 @@ in
       gimp
       git
       gparted-full
-      (callPackage ../pkgs/ilspy/package.nix {})
+      # (callPackage ../pkgs/ilspy/package.nix {})
       imhex
       jq
       kdePackages.kdenlive
@@ -89,6 +90,7 @@ in
       notify-send-all
       pavucontrol
       playerctl
+      prismlauncher
       qdirstat
       (callPackage ../pkgs/ryubing-canary/package.nix {})
       spotify
@@ -146,6 +148,10 @@ in
       platformTheme.name = "gtk3";
     };
     services.xembed-sni-proxy.enable = true;
+    xdg.mimeApps = {
+      defaultApplications."inode/directory" = "thunar.desktop";
+      enable = true;
+    };
   };
   imports = [ ./default.nix ];
   networking.firewall = {
