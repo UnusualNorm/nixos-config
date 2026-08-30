@@ -29,6 +29,7 @@
     enable = true;
     flags = [ "--no-write-lock-file" ];
     flake = "github:UnusualNorm/nixos-config#${config.networking.hostName}";
+    operation = "boot";
   };
   time.timeZone = "America/Chicago";
   users.users.unusualnorm = {
