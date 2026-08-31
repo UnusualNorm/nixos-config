@@ -234,24 +234,20 @@ in
         script = ''
           ${notify-send-all}/bin/notify-send-all \
             "NixOS Upgrade" \
-            "journalctl -Ifu nixos-upgrade.service"
+            "journalctl -Ifu nixos-upgrade"
         '';
       };
       nixos-upgrade-notify-failure = {
-        serviceConfig = {
-          Type = "oneshot";
-        };
+        serviceConfig.Type = "oneshot";
         script = ''
           ${notify-send-all}/bin/notify-send-all \
             --urgency=critical \
             "NixOS Upgrade Failure" \
-            "journalctl -Iu nixos-upgrade.service"
+            "journalctl -Iu nixos-upgrade"
         '';
       };
       nixos-upgrade-notify-success = {
-        serviceConfig = {
-          Type = "oneshot";
-        };
+        serviceConfig.Type = "oneshot";
         script = ''
           ${notify-send-all}/bin/notify-send-all \
             "NixOS Upgrade Success" \
