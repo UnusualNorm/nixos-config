@@ -34,6 +34,7 @@
   time.timeZone = "America/Chicago";
   users.users.unusualnorm = {
     extraGroups = [
+      "dialout"
       "input"
       "networkmanager"
       "wheel"
