@@ -227,6 +227,15 @@ in
       nixos-upgrade = {
         onFailure = [ "nixos-upgrade-notify-failure.service" ];
         onSuccess = [ "nixos-upgrade-notify-success.service" ];
+        wants = [ "nixos-upgrade-notify.service" ];
+      };
+      nixos-upgrade-notify = {
+        serviceConfig.Type = "oneshot";
+        script = ''
+          ${notify-send-all}/bin/notify-send-all \
+            "NixOS Upgrade" \
+            "journalctl -Ifu nixos-upgrade.service"
+        '';
       };
       nixos-upgrade-notify-failure = {
         serviceConfig = {
@@ -236,7 +245,7 @@ in
           ${notify-send-all}/bin/notify-send-all \
             --urgency=critical \
             "NixOS Upgrade Failure" \
-            "journalctl -u nixos-upgrade.service"
+            "journalctl -Iu nixos-upgrade.service"
         '';
       };
       nixos-upgrade-notify-success = {
