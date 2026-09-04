@@ -88,6 +88,9 @@ in
       mpv
       nixd
       notify-send-all
+      (obs-studio.override {
+        cudaSupport = true;
+      })
       pavucontrol
       playerctl
       prismlauncher
