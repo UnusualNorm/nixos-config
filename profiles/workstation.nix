@@ -241,11 +241,7 @@ in
       };
       nixos-upgrade-notify = {
         serviceConfig.Type = "oneshot";
-        script = ''
-          ${notify-send-all}/bin/notify-send-all \
-            "NixOS Upgrade" \
-            "journalctl -Ifu nixos-upgrade"
-        '';
+        script = ''${notify-send-all}/bin/notify-send-all "NixOS Upgrade"'';
       };
       nixos-upgrade-notify-failure = {
         serviceConfig.Type = "oneshot";
