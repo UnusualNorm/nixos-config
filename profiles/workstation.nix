@@ -78,7 +78,7 @@ in
       gimp
       git
       gparted-full
-      # (callPackage ../pkgs/ilspy/package.nix {})
+      ilspy
       imhex
       jq
       kdePackages.kdenlive
@@ -96,7 +96,7 @@ in
       playerctl
       prismlauncher
       qdirstat
-      (callPackage ../pkgs/ryubing-canary/package.nix {})
+      ryubing-canary
       spotify
       steam-run
       swaylock
@@ -105,7 +105,7 @@ in
       vesktop
       vim
       wayvr
-      (callPackage ../pkgs/wscat/package.nix {})
+      wscat
       xarchiver
       xwayland-satellite
       zed-editor
@@ -169,7 +169,10 @@ in
     "flakes"
     "nix-command"
   ];
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ (import ../pkgs) ];
+  };
   programs = {
     direnv.enable = true;
     niri.enable = true;

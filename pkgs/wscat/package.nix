@@ -1,7 +1,6 @@
 {
   buildNpmPackage,
   fetchFromGitHub,
-  lib,
 }: buildNpmPackage rec {
   pname = "wscat";
   version = "6.1.0";

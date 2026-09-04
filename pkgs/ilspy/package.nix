@@ -10,13 +10,13 @@
 }:
 buildDotnetModule (finalAttrs: {
   pname = "ilspy";
-  version = "11.0-rc";
+  version = "11.0";
 
   src = fetchFromGitHub {
     owner = "icsharpcode";
     repo = "ILSpy";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-VKXmbgK3jqaRq8l1uOx0RixWOV5qtxlSdl72SGh4p9s=";
+    hash = "sha256-DXQEe3pNgXiwiZo4npYGHGDjg4LV6cs6aFk4raGjpus=";
   };
 
   nativeBuildInputs = [
@@ -31,12 +31,10 @@ buildDotnetModule (finalAttrs: {
   env.LOCALE_ARCHIVE = lib.optionalString stdenvNoCC.hostPlatform.isLinux "${glibcLocales}/lib/locale/locale-archive";
 
   dotnet-sdk = dotnetCorePackages.sdk_11_0;
+  dotnetRestoreFlags = [ "--force-evaluate" ];
 
-  projectFile = "ILSpy.Desktop.slnf";
+  projectFile = "ILSpy/ILSpy.csproj";
   nugetDeps = ./deps.json;
-  dotnetRestoreFlags = [
-    "--force-evaluate"
-  ];
 
   # see: https://github.com/tunnelvisionlabs/ReferenceAssemblyAnnotator/issues/94
   linkNugetPackages = true;
