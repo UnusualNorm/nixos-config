@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 let
   notify-send-all = pkgs.writeShellApplication {
     name = "notify-send-all";
@@ -160,15 +160,23 @@ in
       enable = true;
     };
   };
-  imports = [ ./default.nix ];
+  imports = [
+    ./default.nix
+    # inputs.nix-citizen.nixosModules.default
+    inputs.home-manager.nixosModules.home-manager
+  ];
   networking.firewall = {
     allowedTCPPorts = [ 57621 ];
     allowedUDPPorts = [ 5353 ];
   };
-  nix.settings.experimental-features = [
-    "flakes"
-    "nix-command"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "flakes"
+      "nix-command"
+    ];
+    # substituters = [ "https://nix-citizen.cachix.org" ];
+    # trusted-public-keys = [  "nix-citizen.cachix.org-1:lPMkWc2X8XD4/7YPEEwXKKBg+SVbYTVrAaLA2wQTKCo=" ];
+  };
   nixpkgs = {
     config.allowUnfree = true;
     overlays = [ (import ../pkgs) ];
@@ -180,6 +188,7 @@ in
       enable = true;
       libraries = pkgs.steam-run.args.multiPkgs pkgs;
     };
+    # rsi-launcher.enable = true;
     steam = {
       enable = true;
       extest.enable = true;
