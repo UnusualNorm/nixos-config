@@ -91,6 +91,7 @@ in
       (obs-studio.override {
         cudaSupport = true;
       })
+      p7zip
       pavucontrol
       playerctl
       prismlauncher
@@ -100,12 +101,15 @@ in
       steam-run
       swaylock
       thunderbird
+      unzip
       vesktop
       vim
       wayvr
       (callPackage ../pkgs/wscat/package.nix {})
+      xarchiver
       xwayland-satellite
       zed-editor
+      zip
     ];
   };
   fonts = {
