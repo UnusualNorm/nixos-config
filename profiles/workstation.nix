@@ -88,14 +88,13 @@ in
       mpv
       nixd
       notify-send-all
-      (obs-studio.override {
-        cudaSupport = true;
-      })
+      obs-studio
       p7zip
       pavucontrol
       playerctl
       prismlauncher
       qdirstat
+      rsi-launcher
       ryubing-canary
       spotify
       steam-run
@@ -162,7 +161,6 @@ in
   };
   imports = [
     ./default.nix
-    # inputs.nix-citizen.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
   ];
   networking.firewall = {
@@ -174,12 +172,12 @@ in
       "flakes"
       "nix-command"
     ];
-    # substituters = [ "https://nix-citizen.cachix.org" ];
-    # trusted-public-keys = [  "nix-citizen.cachix.org-1:lPMkWc2X8XD4/7YPEEwXKKBg+SVbYTVrAaLA2wQTKCo=" ];
+    substituters = [ "https://nix-citizen.cachix.org" ];
+    trusted-public-keys = [ "nix-citizen.cachix.org-1:lPMkWc2X8XD4/7YPEEwXKKBg+SVbYTVrAaLA2wQTKCo=" ];
   };
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [ (import ../pkgs) ];
+    overlays = [ (import ../pkgs { inherit inputs; }) ];
   };
   programs = {
     direnv.enable = true;
@@ -188,7 +186,6 @@ in
       enable = true;
       libraries = pkgs.steam-run.args.multiPkgs pkgs;
     };
-    # rsi-launcher.enable = true;
     steam = {
       enable = true;
       extest.enable = true;

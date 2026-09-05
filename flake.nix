@@ -5,17 +5,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    # nix-citizen = {
-    #   inputs = {
-    #     nix-gaming.follows = "nix-gaming";
-    #     nixpkgs.follows = "nixpkgs";
-    #   };
-    #   url = "github:LovingMelody/nix-citizen";
-    # };
-    # nix-gaming = {
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   url = "github:fufexan/nix-gaming";
-    # };
+    nix-citizen.url = "github:LovingMelody/nix-citizen";
   };
   outputs = inputs@{ home-manager, nixpkgs, self, ... }: {
     nixosConfigurations = {

@@ -38,4 +38,17 @@ buildDotnetModule (finalAttrs: {
 
   # see: https://github.com/tunnelvisionlabs/ReferenceAssemblyAnnotator/issues/94
   linkNugetPackages = true;
+
+  postInstall = lib.optionalString stdenvNoCC.hostPlatform.isLinux ''
+    install -Dm644 \
+      BuildTools/packaging/linux/ilspy.png \
+      "$out/share/icons/hicolor/256x256/apps/ilspy.png"
+
+    install -Dm644 \
+      BuildTools/packaging/linux/ilspy.desktop \
+      "$out/share/applications/ilspy.desktop"
+
+    substituteInPlace "$out/share/applications/ilspy.desktop" \
+      --replace-fail "Exec=/opt/ilspy/ILSpy %F" "Exec=$out/bin/ILSpy %F"
+  '';
 })

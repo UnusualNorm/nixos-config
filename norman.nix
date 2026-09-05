@@ -35,6 +35,11 @@
   home-manager.users.unusualnorm.home.stateVersion = "26.05";
   imports = [ ./profiles/workstation.nix ];
   networking.hostName = "norman";
+  nix.settings = {
+    substituters = [ "https://cache.nixos-cuda.org" ];
+    trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
+  };
+  nixpkgs.config.cudaSupport = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   system.stateVersion = "26.05";
 }

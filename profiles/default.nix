@@ -31,6 +31,13 @@
     flake = "github:UnusualNorm/nixos-config#${config.networking.hostName}";
     operation = "boot";
   };
+  systemd.services.nixos-upgrade.serviceConfig = {
+    CPUWeight = 1;
+    IOSchedulingClass = "idle";
+    IOWeight = 1;
+    Nice = 19;
+    OOMScoreAdjust = 1000;
+  };
   time.timeZone = "America/Chicago";
   users.users.unusualnorm = {
     extraGroups = [
