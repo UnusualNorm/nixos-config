@@ -155,7 +155,10 @@ in
     };
     services.xembed-sni-proxy.enable = true;
     xdg.mimeApps = {
-      defaultApplications."inode/directory" = "thunar.desktop";
+      defaultApplications = {
+        "application/octet-stream" = "imhex.desktop";
+        "inode/directory" = "thunar.desktop";
+      };
       enable = true;
     };
   };
