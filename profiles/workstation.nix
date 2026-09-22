@@ -66,6 +66,7 @@ in
       android-tools
       audacity
       bitwarden-desktop
+      blender
       blockbench
       brave-origin
       brightnessctl
