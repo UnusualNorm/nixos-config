@@ -44,6 +44,7 @@
       "dialout"
       "input"
       "networkmanager"
+      "uinput"
       "wheel"
     ];
     isNormalUser = true;

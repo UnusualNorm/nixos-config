@@ -70,6 +70,7 @@ in
       brave-origin
       brightnessctl
       bubblewrap
+      cemu
       codex
       fastfetch
       ffmpeg
@@ -78,7 +79,7 @@ in
       gimp
       git
       gparted-full
-      ilspy
+      # ilspy
       imhex
       jq
       kdePackages.kdenlive
@@ -100,6 +101,7 @@ in
       steam-run
       swaylock
       thunderbird
+      unityhub
       unzip
       vesktop
       vim
@@ -115,18 +117,21 @@ in
     enableDefaultPackages = true;
     packages = with pkgs; [ font-awesome ];
   };
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Experimental = true;
-        FastConnectable = true;
-      };
-      Policy = {
-        AutoEnable = true;
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          Experimental = true;
+          FastConnectable = true;
+        };
+        Policy = {
+          AutoEnable = true;
+        };
       };
     };
+    uinput.enable = true;
   };
   home-manager.users.unusualnorm = { pkgs, ... }: {
     gtk = {
@@ -235,7 +240,16 @@ in
       pulse.enable = true;
     };
     power-profiles-daemon.enable = true;
+    sunshine = {
+      autoStart = false;
+      capSysAdmin = true;
+      enable = true;
+      openFirewall = true;
+    };
     tumbler.enable = true;
+    udev.extraRules = ''
+      SUBSYSTEM=="misc", KERNEL=="uhid", MODE="0660", GROUP="uinput"
+    '';
     zerotierone = {
       enable = true;
       joinNetworks = [ "a84ac5c10a761621" ];
@@ -309,5 +323,8 @@ in
       targets.graphical-session.wants = [ "foot-server.service" ];
     };
   };
-  virtualisation.podman.enable = true;
+  virtualisation = {
+    containers.registries.settings.unqualified-search-registries = [ "docker.io" ];
+    podman.enable = true;
+  };
 }
